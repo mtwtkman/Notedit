@@ -1,6 +1,5 @@
 import m from 'mithril';
 import { DRAFTS } from '../api';
-import Drafts from '../models/drafts';
 import noteView from '../views/notes';
 
 

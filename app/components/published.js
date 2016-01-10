@@ -1,6 +1,5 @@
 import m from 'mithril';
 import { NOTES } from '../api';
-import Published from '../models/published';
 import noteView from '../views/notes';
 
 

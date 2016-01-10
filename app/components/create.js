@@ -1,11 +1,10 @@
 import m from 'mithril';
 import { xhrConfig, TEXT_NOTES } from '../api';
 import editView from '../views/edit';
-import Create from '../models/create';
 
 
 let createNote = () => {
-    m.request({method: 'POST', url: TEXT_NOTES, config: xhrConfig}).then(response => {
+    return m.request({method: 'POST', url: TEXT_NOTES, config: xhrConfig}).then(response => {
       return response.data;
     });
 };
