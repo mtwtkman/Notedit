@@ -1,6 +1,6 @@
 import m from 'mithril';
-import { SIGN_IN } from '../api';
-import { mainRegion } from '../regions';
+import { xhrConfig, SIGN_IN } from '../api';
+import { mainRegion, failedSignIn } from '../regions';
 import { cookie } from '../utils';
 import Index from './index';
 
@@ -10,13 +10,10 @@ let onClick = (props, e) => {
 }
 
 let signIn = (username, password) => {
-  let config = xhr => {
-    xhr.setRequestHeader('X-XSRF-TOKEN', decodeURIComponent(cookie('X-XSRF-TOKEN')));
-  };
   m.request({
     method: 'POST',
     url: SIGN_IN,
-    config,
+    config: xhrConfig,
     data: {
       login: username,
       password: password,
@@ -31,6 +28,15 @@ let signIn = (username, password) => {
       cookie('username', username);
       cookie('password', password);
       m.mount(mainRegion, m(Index, response.data));
+    } else {
+      m.mount(failedSignIn(), {
+        controller: () => {
+          m.redraw.strategy('diff');
+        },
+        view: ctrl => {
+          return m('span', 'oops... Please retry.');
+        }
+      });
     }
   });
 }
@@ -65,6 +71,7 @@ let view = ctrl => {
         onchange: m.withAttr('value', props.password)
       }
     ),
+    m('div#failed-sign-in'),
     m('p'),
     m('a',
       {

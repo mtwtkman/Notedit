@@ -137,3 +137,7 @@ div#sign-in-wrapper {
   padding: 5%;
   text-align: center;
 }
+
+div#failed-sign-in>span {
+  color: red;
+}

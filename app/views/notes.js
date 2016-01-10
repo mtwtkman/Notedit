@@ -2,6 +2,8 @@ import m from 'mithril';
 import { xhrConfig, NOTES, DRAFT_DELETE } from '../api';
 import { dateFormat } from '../utils';
 import { Modal } from '../components/commons';
+import Create from '../components/create';
+import { indexContentRegion } from '../regions';
 
 
 let deleteDraft = id => {
@@ -14,6 +16,16 @@ let deletePublished = id => {
   m.request({method: 'DELETE', url: `${NOTES}/${id}`, config: xhrConfig}).then(response => {
     console.log(response);
   });
+};
+
+let onEdit = note => {
+  m.mount(indexContentRegion(), m(Create, note.name, m.trust(note.body), note.id));
+
+  // toggle tab
+  ['published', 'drafts'].map(e => {
+    document.getElementById(`nav-${e}`).className = '';
+  });
+  document.getElementById('nav-create').className = 'active';
 };
 
 let onDelete = (id, name, mode) => {
@@ -56,7 +68,7 @@ let noteView = (props, mode) => {
               m('a', {
                 type: 'button',
                 className: 'note-edit btn btn-success',
-                onclick: ''
+                onclick: onEdit.bind(this, note)
               }, [
                 m('span.glyphicon.glyphicon-edit[aria-hidden=true]'),
                 'edit'

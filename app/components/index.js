@@ -48,9 +48,33 @@ let view = ctrl => {
           ])
         ]),
         m('ul.nav.navbar-nav', [
-          m('li.active', m('a.cursor-pointer', {onclick: onPublished.bind(this, props.urlname())}, 'published')),
-          m('li', m('a.cursor-pointer', {onclick: onDrafts.bind(this, props.urlname())}, 'drafts')),
-          m('li', m('a.cursor-pointer', {onclick: onCreate}, 'create')),
+          m('li#nav-published.active',
+            m('a.cursor-pointer',
+              {
+                'data-toggle': 'tab',
+                onclick: onPublished.bind(this, props.urlname())
+              },
+              'published'
+            )
+          ),
+          m('li#nav-drafts',
+            m('a.cursor-pointer',
+              {
+                'data-toggle': 'tab',
+                onclick: onDrafts.bind(this, props.urlname())
+              },
+              'drafts'
+            )
+          ),
+          m('li#nav-create',
+            m('a.cursor-pointer',
+              {
+                'data-toggle': 'tab',
+                onclick: onCreate
+              },
+              'create'
+            )
+          ),
         ]),
         m('ul.nav.navbar-nav.navbar-right', [
           m('li', m('a.cursor-pointer', {onclick: onSignOut}, 'sign out'))

@@ -1,13 +1,19 @@
 import m from 'mithril';
+import { NOTES } from '../api';
 import Published from '../models/published';
 import noteView from '../views/notes';
 
 
+let fetchNotes = (urlname, page=1) => {
+  return m.request({method: 'GET', url: NOTES, data: {urlname, page}}).then(response => {
+    return response.data;
+  });
+};
+
 let controller = urlname => {
   m.redraw.strategy('diff');
-  let model = new Published();
   return {
-    props: model.fetchNotes(urlname),
+    props: fetchNotes(urlname),
     mode: 'published'
   };
 };

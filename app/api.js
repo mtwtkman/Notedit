@@ -23,6 +23,7 @@ export {
   CURRENT_USER,
   NOTES,
   DRAFTS,
+  TEXT_NOTES,
   DRAFT_DELETE,
   DRAFT_SAVE
 }
