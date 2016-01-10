@@ -18,4 +18,3 @@ let view = ctrl => {
 };
 
 export default { controller, view }
-

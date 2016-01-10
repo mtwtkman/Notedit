@@ -58,7 +58,7 @@ let view = ctrl => {
       ])
     ]),
     m('div#index-content', [
-      m('div#published'),
+      m('div#published', m(Published, props.urlname())),
       m('div#drafts'),
       m('div#create')
     ]),
