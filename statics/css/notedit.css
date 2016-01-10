@@ -127,7 +127,6 @@ div#edit-body>textarea {
   border: none;
   resize: none;
   width: 100%;
-  height: auto;
   overflow: hidden;
 }
 

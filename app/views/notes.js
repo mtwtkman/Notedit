@@ -67,7 +67,7 @@ let noteView = (props, mode) => {
             m('span.note-button-group', [
               m('a', {
                 type: 'button',
-                className: 'note-edit btn btn-success',
+                className: 'edit-note btn btn-success',
                 onclick: onEdit.bind(this, note)
               }, [
                 m('span.glyphicon.glyphicon-edit[aria-hidden=true]'),
