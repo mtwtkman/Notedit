@@ -4,12 +4,13 @@ import noteView from '../views/notes';
 
 
 let controller = urlname => {
+  m.redraw.strategy('diff');
   let model = new Drafts();
   return {
     props: model.fetchDrafts(urlname),
     mode: 'drafts'
   };
-}
+};
 
 let view = ctrl => {
   let props = ctrl.props();

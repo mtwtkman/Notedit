@@ -7,11 +7,24 @@ import Drafts from './drafts';
 import Create from './create';
 
 
+let onPublished = urlname => {
+  m.mount(indexContentRegion(), m(Published, urlname));
+};
+
+let onDrafts = urlname => {
+  m.mount(indexContentRegion(), m(Drafts, urlname));
+};
+
+let onCreate = () => {
+  m.mount(indexContentRegion(), Create);
+};
+
 let onSignOut = () => {
   m.request({method: 'POST', url: SIGN_OUT, config: xhrConfig}).then(response => {
     m.mount(mainRegion, SignIn);
   });
-}
+};
+
 
 let controller = data => {
   let props = {
@@ -35,19 +48,19 @@ let view = ctrl => {
           ])
         ]),
         m('ul.nav.navbar-nav', [
-          m('li.active', m('a[href=#published][data-toggle=tab]', 'published')),
-          m('li', m('a[href=#drafts][data-toggle=tab]', 'drafts')),
-          m('li', m('a[href=#create][data-toggle=tab]', 'create')),
+          m('li.active', m('a.cursor-pointer', {onclick: onPublished.bind(this, props.urlname())}, 'published')),
+          m('li', m('a.cursor-pointer', {onclick: onDrafts.bind(this, props.urlname())}, 'drafts')),
+          m('li', m('a.cursor-pointer', {onclick: onCreate}, 'create')),
         ]),
         m('ul.nav.navbar-nav.navbar-right', [
-          m('li', m('a[href=#]', {onclick: onSignOut}, 'sign out'))
+          m('li', m('a.cursor-pointer', {onclick: onSignOut}, 'sign out'))
         ])
       ])
     ]),
-    m('div#index-content.tab-content', [
-      m('div#published.tab-pane.active', m(Published, props.urlname())),
-      m('div#drafts.tab-pane', m(Drafts, props.urlname())),
-      m('div#create.tab-pane', Create),
+    m('div#index-content', [
+      m('div#published'),
+      m('div#drafts'),
+      m('div#create')
     ]),
     m('div#modal')
   ]);

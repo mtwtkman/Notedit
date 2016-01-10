@@ -3,6 +3,7 @@ import editView from '../views/edit';
 
 
 let controller = (name=null, body=null) => {
+  m.redraw.strategy('diff');
   return {
     props: m.prop({name, body})
   }
