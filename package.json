@@ -12,7 +12,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "jspm": "^0.16.19"
+    "jasmine": "^2.4.1",
+    "jspm": "^0.16.19",
+    "karma": "^0.13.19",
+    "nightmare": "^2.1.2"
   },
   "dependencies": {
     "electron-cookies": "~1.1.0",
