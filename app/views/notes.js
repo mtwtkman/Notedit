@@ -18,8 +18,8 @@ let deletePublished = id => {
   });
 };
 
-let onEdit = (note, urlname) => {
-  m.mount(indexContentRegion(), m(Create, urlname, note.name, note.body, note.id));
+let onEdit = note => {
+  m.mount(indexContentRegion(), m(Create, note.name, note.body, note.id));
   toggleTab(['published', 'drafts'], 'create');
 };
 
@@ -38,7 +38,7 @@ let onDelete = (id, name, mode) => {
   modal.show();
 };
 
-let noteView = (props, mode, urlname) => {
+let noteView = (props, mode) => {
   return m('div', [
     m('div#content-wrapper[aria-multiselectable=true]',
       props.notes.map(note => {
@@ -63,7 +63,7 @@ let noteView = (props, mode, urlname) => {
               m('a', {
                 type: 'button',
                 className: 'edit-note btn btn-success',
-                onclick: onEdit.bind(this, note, urlname)
+                onclick: onEdit.bind(this, note)
               }, [
                 m('span.glyphicon.glyphicon-edit[aria-hidden=true]'),
                 'edit'

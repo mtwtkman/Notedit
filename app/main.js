@@ -33,6 +33,9 @@ m.request({method: 'GET', url: CURRENT_USER}).then(response => {
   if (response.error) {
     component = SignIn;
   } else {
+    window.applicationState = {
+      urlname: response.data.urlname
+    };
     component = m(Index, response.data);
   }
   m.mount(mainRegion, component);

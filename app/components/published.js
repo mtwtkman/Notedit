@@ -9,18 +9,17 @@ let fetchNotes = (urlname, page=1) => {
   });
 };
 
-let controller = urlname => {
+let controller = () => {
   m.redraw.strategy('diff');
   return {
-    props: fetchNotes(urlname),
-    mode: 'published',
-    urlname
+    props: fetchNotes(window.applicationState.urlname),
+    mode: 'published'
   };
 };
 
 let view = ctrl => {
   let props = ctrl.props();
-  return noteView(props, ctrl.mode, ctrl.urlname);
+  return noteView(props, ctrl.mode);
 };
 
 export default { controller, view }

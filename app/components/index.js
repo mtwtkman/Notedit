@@ -1,22 +1,20 @@
 import m from 'mithril';
 import { xhrConfig, SIGN_OUT } from '../api';
 import { mainRegion, indexContentRegion } from '../regions';
+import { IndexModel } from '../models/index';
 import SignIn from './sign-in';
 import Published from './published';
 import Drafts from './drafts';
 import Create from './create';
 
 
-let onPublished = urlname => {
-  m.mount(indexContentRegion(), m(Published, urlname));
-};
-
-let onDrafts = urlname => {
-  m.mount(indexContentRegion(), m(Drafts, urlname));
-};
-
-let onCreate = urlname => {
-  m.mount(indexContentRegion(), m(Create, urlname));
+let mountComponent = component => {
+  const COMPONENTS = {
+    Published,
+    Drafts,
+    Create
+  };
+  m.mount(indexContentRegion(), COMPONENTS[component]);
 };
 
 let onSignOut = () => {
@@ -25,16 +23,21 @@ let onSignOut = () => {
   });
 };
 
-
 let controller = data => {
-  let props = {
-    nickname: m.prop(data.nickname),
-    urlname: m.prop(data.urlname),
-    noteCount: m.prop(data.note_count),
-    draftCount: m.prop(data.draft_count),
-    userIconSource: m.prop(data.user_profile_image_path)
+  let model = new IndexModel();
+  model.nickname(data.nickname);
+  model.noteCount(data.note_count);
+  model.draftCount(data.draft_count);
+  model.userIconSource(data.user_profile_image_path);
+
+  return {
+    props: {
+      nickname: model.nickname,
+      noteCount: model.noteCount,
+      draftCount: model.draftCount,
+      userIconSource: model.userIconSource
+    }
   };
-  return { props };
 };
 
 let view = ctrl => {
@@ -52,7 +55,7 @@ let view = ctrl => {
             m('a.cursor-pointer',
               {
                 'data-toggle': 'tab',
-                onclick: onPublished.bind(this, props.urlname())
+                onclick: mountComponent.bind(this, 'Published')
               },
               'published'
             )
@@ -61,7 +64,7 @@ let view = ctrl => {
             m('a.cursor-pointer',
               {
                 'data-toggle': 'tab',
-                onclick: onDrafts.bind(this, props.urlname())
+                onclick: mountComponent.bind(this, 'Drafts')
               },
               'drafts'
             )
@@ -70,7 +73,7 @@ let view = ctrl => {
             m('a.cursor-pointer',
               {
                 'data-toggle': 'tab',
-                onclick: onCreate.bind(this, props.urlname())
+                onclick: mountComponent.bind(this, 'Create')
               },
               'create'
             )
@@ -82,7 +85,7 @@ let view = ctrl => {
       ])
     ]),
     m('div#index-content', [
-      m('div#published', m(Published, props.urlname())),
+      m('div#published', Published),
       m('div#drafts'),
       m('div#create')
     ]),

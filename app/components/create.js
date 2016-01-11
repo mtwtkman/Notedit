@@ -22,7 +22,7 @@ let autoSave = props => {
   });
 };
 
-let onPublish = (props, urlname) => {
+let onPublish = props => {
   let data = {
     free_body: props.body(),
     hastags: [],
@@ -34,7 +34,7 @@ let onPublish = (props, urlname) => {
     status: 'published'
   };
   return m.request({method: 'PUT', url: TEXT_NOTES + `/${props.id()}`, data, config: xhrConfig}).then(response => {
-    m.mount(indexContentRegion, m(Published, urlname));
+    m.mount(indexContentRegion, m(Published, window.applicationState.urlname));
   });
 };
 
