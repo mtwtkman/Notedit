@@ -1,6 +1,6 @@
 import m from 'mithril';
 import { xhrConfig, NOTES, DRAFT_DELETE } from '../api';
-import { dateFormat } from '../utils';
+import { dateFormat, toggleTab } from '../utils';
 import { Modal } from '../components/commons';
 import Create from '../components/create';
 import { indexContentRegion } from '../regions';
@@ -18,14 +18,9 @@ let deletePublished = id => {
   });
 };
 
-let onEdit = note => {
-  m.mount(indexContentRegion(), m(Create, note.name, m.trust(note.body), note.id));
-
-  // toggle tab
-  ['published', 'drafts'].map(e => {
-    document.getElementById(`nav-${e}`).className = '';
-  });
-  document.getElementById('nav-create').className = 'active';
+let onEdit = (note, urlname) => {
+  m.mount(indexContentRegion(), m(Create, urlname, note.name, note.body, note.id));
+  toggleTab(['published', 'drafts'], 'create');
 };
 
 let onDelete = (id, name, mode) => {
@@ -43,7 +38,7 @@ let onDelete = (id, name, mode) => {
   modal.show();
 };
 
-let noteView = (props, mode) => {
+let noteView = (props, mode, urlname) => {
   return m('div', [
     m('div#content-wrapper[aria-multiselectable=true]',
       props.notes.map(note => {
@@ -68,7 +63,7 @@ let noteView = (props, mode) => {
               m('a', {
                 type: 'button',
                 className: 'edit-note btn btn-success',
-                onclick: onEdit.bind(this, note)
+                onclick: onEdit.bind(this, note, urlname)
               }, [
                 m('span.glyphicon.glyphicon-edit[aria-hidden=true]'),
                 'edit'

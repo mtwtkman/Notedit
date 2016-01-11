@@ -13,13 +13,14 @@ let controller = urlname => {
   m.redraw.strategy('diff');
   return {
     props: fetchNotes(urlname),
-    mode: 'published'
+    mode: 'published',
+    urlname
   };
 };
 
 let view = ctrl => {
   let props = ctrl.props();
-  return noteView(props, ctrl.mode);
+  return noteView(props, ctrl.mode, ctrl.urlname);
 };
 
 export default { controller, view }

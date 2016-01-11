@@ -15,8 +15,8 @@ let onDrafts = urlname => {
   m.mount(indexContentRegion(), m(Drafts, urlname));
 };
 
-let onCreate = () => {
-  m.mount(indexContentRegion(), Create);
+let onCreate = urlname => {
+  m.mount(indexContentRegion(), m(Create, urlname));
 };
 
 let onSignOut = () => {
@@ -70,7 +70,7 @@ let view = ctrl => {
             m('a.cursor-pointer',
               {
                 'data-toggle': 'tab',
-                onclick: onCreate
+                onclick: onCreate.bind(this, props.urlname())
               },
               'create'
             )

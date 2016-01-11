@@ -43,8 +43,16 @@ let dateFormat = ISOFormat => {
   return date + ' ' + time;
 }
 
+let toggleTab = (deactive, active) => {
+  deactive.map(e => {
+    document.getElementById(`nav-${e}`).className = '';
+  });
+  document.getElementById(`nav-${active}`).className = 'active';
+};
+
 export {
   cookie,
   removeCookie,
-  dateFormat
+  dateFormat,
+  toggleTab
 }

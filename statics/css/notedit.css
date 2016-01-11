@@ -118,6 +118,19 @@ div#edit-wrapper {
   margin-bottom: 20px;
 }
 
+div#edit-status {
+  height: 50px;
+}
+
+div#save-message {
+  display: inline;
+}
+
+div#edit-button {
+  margin-top: 10px;
+  float: right;
+}
+
 h3#edit-name>input {
   border: none;
   width: 100%;
