@@ -1,47 +1,12 @@
 import m from 'mithril';
-import { xhrConfig, NOTES, DRAFT_DELETE } from '../api';
-import { dateFormat, toggleTab } from '../utils';
-import { Modal } from '../components/commons';
-import Create from '../components/create';
-import { indexContentRegion } from '../regions';
+import { dateFormat } from '../../utils';
 
 
-let deleteDraft = id => {
-  m.request({method: 'DELETE', url: DRAFT_DELETE, data: {id}, config: xhrConfig}).then(response => {
-    console.log(response);
-  });
-};
-
-let deletePublished = id => {
-  m.request({method: 'DELETE', url: `${NOTES}/${id}`, config: xhrConfig}).then(response => {
-    console.log(response);
-  });
-};
-
-let onEdit = note => {
-  m.mount(indexContentRegion(), m(Create, note.name, note.body, note.id));
-  toggleTab(['published', 'drafts'], 'create');
-};
-
-let onDelete = (id, name, mode) => {
-  let onOK = mode === 'published' ? deletePublished : deleteDraft;
-  let modal = new Modal(
-    id,
-    'Delete',
-    m('div', [
-      'Are you sure you want to delete?',
-      m('p'),
-      m('span#ensure-name', name)
-     ]),
-    onOK
-  );
-  modal.show();
-};
-
-let noteView = (props, mode) => {
+let noteView = ctrl => {
+  let props = ctrl.props;
   return m('div', [
     m('div#content-wrapper[aria-multiselectable=true]',
-      props.notes.map(note => {
+      props.notes().map(note => {
         return m(`div#${note.id}.note`, [
           m('h3.note-name',
             m('a', {
@@ -63,7 +28,7 @@ let noteView = (props, mode) => {
               m('a', {
                 type: 'button',
                 className: 'edit-note btn btn-success',
-                onclick: onEdit.bind(this, note)
+                onclick: ctrl.onEdit.bind(this, note)
               }, [
                 m('span.glyphicon.glyphicon-edit[aria-hidden=true]'),
                 'edit'
@@ -72,7 +37,7 @@ let noteView = (props, mode) => {
               m('a', {
                 type: 'button',
                 className: 'note-delete btn btn-danger',
-                onclick: onDelete.bind(this, note.id, note.name, mode)
+                onclick: ctrl.onDelete.bind(this, note.id, note.name, ctrl.mode)
               }, [
                 m('span.glyphicon.glyphicon-trash[aria-hidden=true]'),
                 'delete'

@@ -1,8 +1,8 @@
 import m from 'mithril';
 import { CURRENT_USER, PATH_ROOT } from './api';
 import { mainRegion } from './regions';
-import SignIn from './components/sign-in';
-import Index from './components/index';
+import SignIn from './components/sign-in/component';
+import Index from './components/index/component';
 import { cookie, removeCookie } from './utils';
 let remote = require('remote');  // import from node_modules.(CAN NOT FUCKING TRANSPILE)
 
@@ -29,13 +29,12 @@ if (!cookie('X-XSRF-TOKEN')) {
 };
 
 let component;
+window.applicationState = {};
 m.request({method: 'GET', url: CURRENT_USER}).then(response => {
   if (response.error) {
     component = SignIn;
   } else {
-    window.applicationState = {
-      urlname: response.data.urlname
-    };
+    window.applicationState.urlname = response.data.urlname;
     component = m(Index, response.data);
   }
   m.mount(mainRegion, component);

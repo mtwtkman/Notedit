@@ -2,7 +2,7 @@ import m from 'mithril';
 import { modalRegion } from '../regions';
 
 
-class Modal{
+export default class Modal{
   constructor(id=null, title=null, body=null, onOK=null) {
     this.onOK = onOK;
     this.id = id;
@@ -56,7 +56,3 @@ class Modal{
     });
   }
 };
-
-export {
-  Modal
-}
