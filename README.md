@@ -1,5 +1,6 @@
 # Notedit is
 Dadecated browser for [note.mu](https://note.mu/) implemented by electron.
+
 This is very limited because developed just for editing Text.
 
 # Usage
