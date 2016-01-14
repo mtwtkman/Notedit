@@ -42,19 +42,14 @@ let controller = (name='', body='', id=null) => {
     });
   };
 
-  let createNote = () => {
-    return m.request({method: 'POST', url: TEXT_NOTES, config: xhrConfig}).then(response => {
-      return respons.data.id;
-    });
-  };
-
   m.redraw.strategy('diff');
 
+  let props = new CreateModel(id=id, name=name, body=body);
   if (!id) {
-    id = createNote()();
+    id = props.createNote();
   }
   return {
-    props: new CreateModel(id=id, name=name, body=body),
+    props,
     autoResize,
     autoSave,
     onPublish

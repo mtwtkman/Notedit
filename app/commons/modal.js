@@ -1,17 +1,18 @@
 import m from 'mithril';
+import Bullet from 'bullet';
 import { modalRegion } from '../regions';
 
 
 export default class Modal{
   constructor(id=null, title=null, body=null, onOK=null) {
-    this.onOK = onOK;
-    this.id = id;
     this.component = {
       controller: () => {
         m.redraw.strategy('diff');
         return {
           title,
-          body
+          body,
+          id,
+          onOK
         };
       },
       view: ctrl => {
@@ -32,7 +33,7 @@ export default class Modal{
                 m('a', {
                   type: 'button',
                   className: 'btn btn-primary',
-                  onclick: this.onOK.bind(this, this.id)
+                  onclick: ctrl.onOK.bind(this, ctrl.id)
                 }, 'ok')
               ),
             ])
@@ -54,5 +55,6 @@ export default class Modal{
         return null;
       }
     });
+    Bullet.off('modal:destroy');
   }
 };

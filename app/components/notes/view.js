@@ -6,7 +6,7 @@ let noteView = ctrl => {
   let props = ctrl.props;
   return m('div', [
     m('div#content-wrapper[aria-multiselectable=true]',
-      props.notes().map(note => {
+      props.notes().map((note, index) => {
         return m(`div#${note.id}.note`, [
           m('h3.note-name',
             m('a', {
@@ -37,7 +37,7 @@ let noteView = ctrl => {
               m('a', {
                 type: 'button',
                 className: 'note-delete btn btn-danger',
-                onclick: ctrl.onDelete.bind(this, note.id, note.name, ctrl.mode)
+                onclick: ctrl.onDelete.bind(this, props, index, note, ctrl.mode)
               }, [
                 m('span.glyphicon.glyphicon-trash[aria-hidden=true]'),
                 'delete'

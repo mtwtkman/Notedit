@@ -32,6 +32,7 @@
   "jspm": {
     "dependencies": {
       "autosize": "github:jackmoore/autosize@^3.0.14",
+      "bullet": "github:munkychop/bullet@^2.1.0",
       "mithril": "npm:mithril@^0.2.2-rc.1"
     },
     "devDependencies": {
