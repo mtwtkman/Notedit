@@ -15,6 +15,9 @@ let controller = (name='', body='', id=null) => {
   };
 
   let autoSave = props => {
+    if (!props.name()) {
+      return;
+    }
     let data = {
       name: props.name(),
       body: props.body(),

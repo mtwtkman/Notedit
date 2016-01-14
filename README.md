@@ -15,5 +15,5 @@ now WIP...
 - [ ] lazy fetch articles
 - [ ] selectable delete
 - [ ] WYSIWYG editor
-- [ ] delete published article
+- [x] delete published article
 - [ ] vim fravored keybind

@@ -1,6 +1,6 @@
 import m from 'mithril';
 import Bullet from 'bullet';
-import { xhrConfig, DRAFT_DELETE } from '../../api';
+import { xhrConfig, NOTES, DRAFT_DELETE } from '../../api';
 import { toggleTab } from '../../utils';
 import NotesModel from './model';
 import Modal from '../../commons/modal';
