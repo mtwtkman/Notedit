@@ -41,7 +41,7 @@ let controller = (name='', body='', id=null) => {
       status: 'published'
     };
     return m.request({method: 'PUT', url: TEXT_NOTES + `/${props.id()}`, data, config: xhrConfig}).then(response => {
-      m.mount(indexContentRegion, m(Notes, 'published'));
+      m.mount(indexContentRegion(), m(Notes, 'published'));
     });
   };
 
