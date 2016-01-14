@@ -1,7 +1,14 @@
-# Notedit is
+# Notedit
 Dadecated browser for [note.mu](https://note.mu/) implemented by electron.
 
 This is very limited because developed just for editing Text.
+
+# Why
+1. I don't need all of services of official(All I need is text edit).
+
+2. I just want to edit and list my article and use GFM.
+
+3. This is good chance to try electron.
 
 # Usage
 now WIP...

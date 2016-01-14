@@ -14,6 +14,7 @@ export default class NotesModel {
     };
     return m.request({method: 'GET', url, data}).then(response => {
       this.notes(response.data.notes);
+      // try async/await to lazy fetch
     });
   }
 };
