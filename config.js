@@ -19,6 +19,7 @@ System.config({
     "babel-runtime": "npm:babel-runtime@5.8.34",
     "bullet": "github:munkychop/bullet@2.1.0",
     "core-js": "npm:core-js@1.2.6",
+    "marked": "github:chjj/marked@0.3.5",
     "mithril": "npm:mithril@0.2.2-rc.1",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"

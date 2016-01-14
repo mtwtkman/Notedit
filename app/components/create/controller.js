@@ -1,9 +1,11 @@
 import m from 'mithril';
 import autosize from 'autosize';
+import marked from 'marked';
 import { xhrConfig, TEXT_NOTES, DRAFT_SAVE } from '../../api';
 import { indexContentRegion } from '../../regions';
 import CreateModel from './model';
 import Notes from '../notes/component';
+import { toggleTab } from '../../utils';
 
 
 let controller = (name='', body='', id=null) => {
@@ -20,7 +22,7 @@ let controller = (name='', body='', id=null) => {
     }
     let data = {
       name: props.name(),
-      body: props.body(),
+      body: marked(props.body()),
       id: props.id(),
       status: 'draft'
     };
@@ -42,6 +44,7 @@ let controller = (name='', body='', id=null) => {
     };
     return m.request({method: 'PUT', url: TEXT_NOTES + `/${props.id()}`, data, config: xhrConfig}).then(response => {
       m.mount(indexContentRegion(), m(Notes, 'published'));
+      toggleTab(['drafts', 'create'], 'published');
     });
   };
 
