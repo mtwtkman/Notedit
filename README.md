@@ -6,12 +6,13 @@ This is very limited because developed just for editing Text.
 now WIP...
 
 # TODO
-[x] sign in
-[x] sign out
-[x] delete draft article
-[x] autosave article editing
-[x] publish article
-[ ] lazy fetch articles
-[ ] selectable delete
-[ ] WYSIWYG editor
-[ ] delete published article
+- [x] sign in
+- [x] sign out
+- [x] delete draft article
+- [x] autosave article editing
+- [x] publish article
+- [ ] lazy fetch articles
+- [ ] selectable delete
+- [ ] WYSIWYG editor
+- [ ] delete published article
+- [ ] vim fravored keybind
