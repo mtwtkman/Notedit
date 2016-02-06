@@ -3,18 +3,26 @@ import { NOTES, DRAFTS } from '../../api';
 
 
 export default class NotesModel {
-  constructor(notes=null) {
-    this.notes = m.prop(notes || new Array());
+  constructor(mode='published') {
+    this.notes = m.prop(JSON.parse(localStorage[mode] || '[]'));
+    this.mode = mode;
   }
-  fetchNotes(mode, page=1) {
-    let url = mode === 'published' ? NOTES : DRAFTS;
+  fetchNotes() {
+    let url = this.mode === 'published' ? NOTES : DRAFTS;
     let data = {
-      urlname: window.applicationState.urlname,
-      page
+      urlname: localStorage.urlname,
+      page: parseInt(localStorage[this.mode + '_next_page'])
     };
+    let self = this;
     return m.request({method: 'GET', url, data}).then(response => {
-      this.notes(response.data.notes);
-      // try async/await to lazy fetch
+      // update fetched note data at localStorage
+      let published = JSON.parse(localStorage[self.mode] || '[]');
+      published = published.concat(response.data.notes);
+      localStorage[self.mode] = JSON.stringify(published);
+      localStorage[self.mode + '_next_page'] = response.data.next_page;
+      localStorage[self.mode + '_last_page'] = response.data.last_page;
+
+      self.notes(published);
     });
   }
 };

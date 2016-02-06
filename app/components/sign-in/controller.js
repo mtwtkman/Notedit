@@ -29,7 +29,7 @@ let controller = () => {
         // store user information to cookie.
         cookie('username', username);
         cookie('password', password);
-        window.applicationState.urlname = response.data.urlname;
+        localStorage.urlname = response.data.urlname;
         m.mount(mainRegion, m(Index, response.data));
       } else {
         m.mount(failedSignIn(), {

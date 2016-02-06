@@ -11,7 +11,7 @@ let view = ctrl => {
           type: 'button',
           id: 'publish-button',
           className: 'btn btn-primary',
-          onclick: ctrl.onPublish.bind(this, props, window.applicationState.urlname)
+          onclick: ctrl.onPublish.bind(this, props, localStorage.urlname)
         }, 'publish'),
       ]),
     ]),

@@ -47,8 +47,11 @@ let controller = mode => {
     Bullet.on('modal:destroy', modal.destroy);
   };
 
-  let props = new NotesModel();
-  props.fetchNotes(mode);
+  let props = new NotesModel(mode);
+  if (!localStorage[mode]) {
+    localStorage[mode + '_next_page'] = 1;
+    props.fetchNotes();
+  }
 
   return {
     props,
