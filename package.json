@@ -5,7 +5,7 @@
   "main": "electron-main.js",
   "scripts": {
     "jspm": "jspm",
-    "lint": "gulp lint",
+    "lint": "eslint app/**/*.js",
     "start": "electron electron-main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,9 +15,6 @@
   "devDependencies": {
     "babel-eslint": "^4.1.6",
     "eslint": "^1.10.3",
-    "gulp": "^3.9.0",
-    "gulp-eslint": "^1.1.1",
-    "gulp-load-plugins": "^1.2.0",
     "jasmine": "^2.4.1",
     "jspm": "^0.16.19",
     "karma": "^0.13.19",
