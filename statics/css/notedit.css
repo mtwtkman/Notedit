@@ -122,8 +122,26 @@ div#edit-status {
   height: 50px;
 }
 
-div#save-message {
+div#save-message-text {
   display: inline;
+}
+
+div#no-title-alert {
+  display: inline;
+}
+
+.hidden-tx {
+  display: none;
+}
+
+.show-tx {
+  font-size: 9pt;
+  color: #41c9ba;
+}
+
+.show-alert-tx {
+  font-size: 9pt;
+  color: red;
 }
 
 div#edit-button {

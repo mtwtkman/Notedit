@@ -31,6 +31,7 @@ let controller = mode => {
       m.request(req).then(response => {
         props.notes().splice(index, 1);
         Bullet.trigger('modal:destroy');
+        localStorage[mode + '_modernized'] = false;
       });
     };
     let modal = new Modal(
@@ -48,8 +49,12 @@ let controller = mode => {
   };
 
   let props = new NotesModel(mode);
-  if (!localStorage[mode]) {
-    localStorage[mode + '_next_page'] = 1;
+  if (!eval(localStorage[mode + '_modernized'])) {
+    // Clear localStorate to initialize.
+    // FIXME:
+    //  I guess that stored notes should be updated partially.
+    //  I rearize caching has no mean for now.
+    localStorage[mode] = [];
     props.fetchNotes();
   }
 

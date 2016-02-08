@@ -6,23 +6,35 @@ export default class NotesModel {
   constructor(mode='published') {
     this.notes = m.prop(JSON.parse(localStorage[mode] || '[]'));
     this.mode = mode;
+    this.url = mode === 'published' ? NOTES : DRAFTS;
   }
   fetchNotes() {
-    let url = this.mode === 'published' ? NOTES : DRAFTS;
-    let data = {
-      urlname: localStorage.urlname,
-      page: parseInt(localStorage[this.mode + '_next_page'])
+    this.data = {
+      urlname: localStorage['urlname'],
+      page: 1
     };
+    let generator = this.iterFetchNotes();
+    this._fetchNotes(generator);
+  }
+  _fetchNotes(generator) {
     let self = this;
-    return m.request({method: 'GET', url, data}).then(response => {
-      // update fetched note data at localStorage
-      let published = JSON.parse(localStorage[self.mode] || '[]');
-      published = published.concat(response.data.notes);
-      localStorage[self.mode] = JSON.stringify(published);
-      localStorage[self.mode + '_next_page'] = response.data.next_page;
-      localStorage[self.mode + '_last_page'] = response.data.last_page;
-
-      self.notes(published);
+    let promise = generator.next().value;
+    promise.then(response => {
+      let stored_notes = self.notes();
+      stored_notes = stored_notes.concat(response.data.notes);
+      localStorage[self.mode] = JSON.stringify(stored_notes);
+      self.data.page = response.data.next_page;
+      self.notes(stored_notes);
+      if (response.data.last_page) {
+        localStorage[self.mode + '_modernized'] = true;
+        return;
+      }
+      this._fetchNotes(generator);
     });
+  }
+  *iterFetchNotes() {
+    while (true) {
+      yield m.request({method: 'GET', url: this.url, data: this.data});
+    }
   }
 };
