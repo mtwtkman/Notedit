@@ -5,8 +5,10 @@ var crashReporter = electron.crashReporter;
 var BrowserWindow = electron.BrowserWindow;
 
 var mainWindow = null;
+var index = 'index.html';
 if (process.env.NODE_ENV === 'develop') {
   crashReporter.start();
+  index = 'index-dev.html';
 }
 
 app.on('window-all-closed', function() {
@@ -22,5 +24,5 @@ app.on('ready', function() {
     'min-width': width,
     'min-height': height
   });
-  mainWindow.loadURL('file://' + path.resolve(__dirname, 'index.html'));
+  mainWindow.loadURL('file://' + path.resolve(__dirname, index));
 });
