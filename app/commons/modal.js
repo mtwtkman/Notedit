@@ -1,5 +1,5 @@
 import m from 'mithril';
-import Bullet from 'bullet';
+import Bullet from 'bullet-pubsub';
 import { modalRegion } from '../regions';
 
 

@@ -17,7 +17,7 @@ System.config({
     "autosize": "github:jackmoore/autosize@3.0.14",
     "babel": "npm:babel-core@5.8.34",
     "babel-runtime": "npm:babel-runtime@5.8.34",
-    "bullet": "github:munkychop/bullet@2.1.0",
+    "bullet-pubsub": "github:munkychop/bullet@2.1.0",
     "core-js": "npm:core-js@1.2.6",
     "lodash": "npm:lodash@4.3.0",
     "mithril": "npm:mithril@0.2.2-rc.1",

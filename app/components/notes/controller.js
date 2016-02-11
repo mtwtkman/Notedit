@@ -1,5 +1,5 @@
 import m from 'mithril';
-import Bullet from 'bullet';
+import Bullet from 'bullet-pubsub';
 import { xhrConfig, NOTES, DRAFT_DELETE } from '../../api';
 import { toggleTab } from '../../utils';
 import NotesModel from './model';
