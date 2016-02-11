@@ -141,7 +141,7 @@ div#no-title-alert {
 
 .show-alert-tx {
   font-size: 9pt;
-  color: red;
+  color: #a94442;
 }
 
 div#edit-button {
@@ -149,15 +149,15 @@ div#edit-button {
   float: right;
 }
 
-h3#edit-name>input {
+input#edit-name-inner {
   border: none;
   width: 100%;
 }
 
-div#edit-body>textarea {
+textarea#edit-body-inner {
   border: none;
-  resize: none;
   width: 100%;
+  resize: none;
   overflow: hidden;
 }
 
@@ -169,5 +169,5 @@ div#sign-in-wrapper {
 }
 
 div#failed-sign-in>span {
-  color: red;
+  color: #a94442;
 }

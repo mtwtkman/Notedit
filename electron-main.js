@@ -4,7 +4,6 @@ var app = electron.app;
 var crashReporter = electron.crashReporter;
 var BrowserWindow = electron.BrowserWindow;
 
-
 var mainWindow = null;
 if (process.env.NODE_ENV === 'develop') {
   crashReporter.start();

@@ -14,6 +14,8 @@ const DRAFTS = `${NOTES}/drafts`;
 const TEXT_NOTES = `${API_ROOT}/text_notes`;
 const DRAFT_DELETE = `${TEXT_NOTES}/draft_delete`;
 const DRAFT_SAVE = `${TEXT_NOTES}/draft_save`;
+const ACTIVITIES = `${API_ROOT}/activities`;
+const POST_ACTIVITIES = `${ACTIVITIES}/log?post=%7B%22method%22:%22POST%22%7D`;
 
 export {
   xhrConfig,
@@ -25,5 +27,7 @@ export {
   DRAFTS,
   TEXT_NOTES,
   DRAFT_DELETE,
-  DRAFT_SAVE
+  DRAFT_SAVE,
+  ACTIVITIES,
+  POST_ACTIVITIES
 }

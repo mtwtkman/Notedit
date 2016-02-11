@@ -4,7 +4,15 @@ import { mainRegion } from './regions';
 import SignIn from './components/sign-in/component';
 import Index from './components/index/component';
 import { cookie, removeCookie } from './utils';
-let remote = require('remote');
+const remote = require('remote');
+
+window.onbeforeunload = () => {
+  // clean localStorage every reload.
+  ['drafts', 'published'].map(k => {
+    delete(localStorage[k]);
+    delete(localStorage[k + '_modernized']);
+  });
+};
 
 let deserialize = value => {
   return {data: value};

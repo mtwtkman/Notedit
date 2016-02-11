@@ -12,7 +12,7 @@ let controller = mode => {
   m.redraw.strategy('diff');
 
   let onEdit = note => {
-    m.mount(indexContentRegion(), m(Create, note.name, note.body, note.id));
+    m.mount(indexContentRegion(), m(Create, note.key));
     toggleTab(['published', 'drafts'], 'create');
   };
 
@@ -51,10 +51,9 @@ let controller = mode => {
   let props = new NotesModel(mode);
   if (!eval(localStorage[mode + '_modernized'])) {
     // Clear localStorate to initialize.
-    // FIXME:
-    //  I guess that stored notes should be updated partially.
-    //  I rearize caching has no mean for now.
+    // FIXME: Should update partially.
     localStorage[mode] = [];
+    props.notes([]);
     props.fetchNotes();
   }
 
