@@ -29,11 +29,8 @@
   },
   "dependencies": {
     "autosize": "^3.0.14",
-    "bootstrap": "~3.3.6",
     "bullet-pubsub": "^2.1.0",
-    "electron-cookies": "~1.1.0",
     "electron-prebuilt": "~0.36.2",
-    "jquery": "^2.2.0",
     "lodash": "^4.3.0",
     "mithril": "^0.2.2-rc.1"
   },
