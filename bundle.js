@@ -5693,11 +5693,7 @@
 	var remote = __webpack_require__(217);
 
 	window.onbeforeunload = function () {
-	  // clean localStorage every reload.
-	  ['drafts', 'published'].map(function (k) {
-	    delete localStorage[k];
-	    delete localStorage[k + '_modernized'];
-	  });
+	  (0, _utils.clearLocalStorage)();
 	};
 
 	var deserialize = function deserialize(value) {
@@ -7236,10 +7232,18 @@
 	  document.getElementById('nav-' + active).className = 'active';
 	};
 
+	var clearLocalStorage = function clearLocalStorage() {
+	  ['drafts', 'published'].map(function (k) {
+	    delete localStorage[k];
+	    delete localStorage[k + '_modernized'];
+	  });
+	};
+
 	exports.cookie = cookie;
 	exports.removeCookie = removeCookie;
 	exports.dateFormat = dateFormat;
 	exports.toggleTab = toggleTab;
+	exports.clearLocalStorage = clearLocalStorage;
 
 /***/ },
 /* 195 */
@@ -7376,6 +7380,7 @@
 	      }
 	    }).then(function (response) {
 	      if (response.data) {
+	        (0, _utils.clearLocalStorage)();
 	        // store user information to cookie.
 	        (0, _utils.cookie)('username', username);
 	        (0, _utils.cookie)('password', password);

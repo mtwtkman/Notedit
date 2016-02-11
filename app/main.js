@@ -3,15 +3,11 @@ import { CURRENT_USER, PATH_ROOT } from './api';
 import { mainRegion } from './regions';
 import SignIn from './components/sign-in/component';
 import Index from './components/index/component';
-import { cookie, removeCookie } from './utils';
+import { cookie, removeCookie, clearLocalStorage } from './utils';
 const remote = require('remote');
 
 window.onbeforeunload = () => {
-  // clean localStorage every reload.
-  ['drafts', 'published'].map(k => {
-    delete(localStorage[k]);
-    delete(localStorage[k + '_modernized']);
-  });
+  clearLocalStorage();
 };
 
 let deserialize = value => {

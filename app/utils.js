@@ -50,9 +50,17 @@ let toggleTab = (deactive, active) => {
   document.getElementById(`nav-${active}`).className = 'active';
 };
 
+let clearLocalStorage = () => {
+  ['drafts', 'published'].map(k => {
+    delete(localStorage[k]);
+    delete(localStorage[k + '_modernized']);
+  });
+};
+
 export {
   cookie,
   removeCookie,
   dateFormat,
-  toggleTab
+  toggleTab,
+  clearLocalStorage
 }

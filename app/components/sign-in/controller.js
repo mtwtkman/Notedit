@@ -1,7 +1,7 @@
 import m from 'mithril';
 import { xhrConfig, SIGN_IN } from '../../api';
 import { mainRegion, failedSignIn } from '../../regions';
-import { cookie } from '../../utils';
+import { cookie, clearLocalStorage } from '../../utils';
 import SignInModel from './model';
 import Index from '../index/component';
 
@@ -26,6 +26,7 @@ let controller = () => {
       }
     }).then(response => {
       if (response.data) {
+        clearLocalStorage();
         // store user information to cookie.
         cookie('username', username);
         cookie('password', password);
