@@ -1,8 +1,11 @@
 {
   "name": "notedit",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.2",
+  "description": "Limited browser for note.mu",
   "main": "electron-main.js",
+  "bin": {
+    "notedit": "./bin/cmd.js"
+  },
   "scripts": {
     "jspm": "jspm",
     "webpack": "webpack",
@@ -10,7 +13,7 @@
     "start": "electron electron-main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": ["note.mu", "browser"],
   "author": "",
   "license": "ISC",
   "devDependencies": {
