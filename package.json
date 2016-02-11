@@ -1,6 +1,6 @@
 {
   "name": "notedit",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Limited browser for note.mu",
   "main": "electron-main.js",
   "bin": {
